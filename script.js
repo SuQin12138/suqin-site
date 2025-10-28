@@ -87,12 +87,12 @@ function showRandomPoem() {
 
 // 点击显示详情
 poemCard.addEventListener("click", () => {
-  extra.style.display = extra.style.display === "none" ? "block" : "none";
+  extra.style.display = extra.style.display === "none" ? "block" : "block";
 });
 
 // 分类菜单切换
 categoryBtn.addEventListener("click", () => {
-  categoryList.style.display = categoryList.style.display === "none" ? "block" : "none";
+  categoryList.style.display = categoryList.style.display === "none" ? "block" : "block";
 });
 
 window.onload = loadPoems;
