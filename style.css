@@ -119,6 +119,13 @@ p {
   font-size: 0.95em;
   color: #4b3d2f;
   display: none;
+  opacity: 0;
+  transition: opacity 0.8s;
+}
+
+.extra.show {
+  display: block;
+  opacity: 1;
 }
 
 .fade {
