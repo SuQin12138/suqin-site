@@ -15,15 +15,14 @@ body {
   align-items: center;
   min-height: 100vh;
   color: #2b2b2b;
+  flex-direction: column;
 }
 
 body::before {
   content: "";
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   background: url("https://img.freepik.com/free-photo/black-ink-blot-texture_1150-118.jpg") repeat;
   opacity: 0.05;
   animation: inkFlow 30s infinite alternate;
@@ -31,9 +30,58 @@ body::before {
 }
 
 @keyframes inkFlow {
-  0% { transform: translate(0,0) scale(1); opacity: 0.03; }
-  50% { transform: translate(-50px, 30px) scale(1.05); opacity: 0.05; }
-  100% { transform: translate(0,0) scale(1); opacity: 0.03; }
+  0% { transform: translate(0,0) scale(1); opacity:0.03; }
+  50% { transform: translate(-50px,30px) scale(1.05); opacity:0.05; }
+  100% { transform: translate(0,0) scale(1); opacity:0.03; }
+}
+
+header {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#search-input {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 1em;
+  border: 1px solid #d3c6a0;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+#category-btn {
+  padding: 8px 12px;
+  font-size: 1em;
+  border-radius: 8px;
+  border: 1px solid #d3c6a0;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+#category-list {
+  position: absolute;
+  top: 50px;
+  right: 20px;
+  background: rgba(255,255,255,0.95);
+  border: 1px solid #d3c6a0;
+  border-radius: 8px;
+  list-style: none;
+  padding: 10px;
+  display: none;
+  z-index: 10;
+}
+
+#category-list li {
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+#category-list li:hover {
+  background-color: #f1e9d2;
 }
 
 .container {
@@ -44,12 +92,6 @@ body::before {
   border: 1px solid #d3c6a0;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   border-radius: 16px;
-  animation: inkfade 20s infinite alternate ease-in-out;
-}
-
-@keyframes inkfade {
-  0% { box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-  100% { box-shadow: 0 0 60px rgba(0,0,0,0.15); }
 }
 
 h1 {
