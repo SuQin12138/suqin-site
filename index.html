@@ -3,61 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>小灰灰的音乐空间 🎵</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Segoe UI', sans-serif;
-      color: #333;
-    }
-    h1 {
-      font-size: 2.2em;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    }
-
-    /* 悬浮音乐播放器 */
-    .music-player {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 340px;
-      height: 86px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-      border-radius: 12px;
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .music-player:hover {
-      transform: scale(1.05);
-    }
-
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-  </style>
+  <title>苏琴诗词空间 · SuQin Poetry Space</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>🎶 欢迎来到小灰灰的音乐空间 🎶</h1>
-
-  <!-- 网易云音乐播放器 -->
-  <div class="music-player">
-    <iframe
-      src="//music.163.com/outchain/player?type=2&id=33894312&auto=1&height=66"
-      frameborder="no"
-      allow="autoplay">
-    </iframe>
+  <div class="container">
+    <div class="poem-card" id="poem-card">
+      <h1 id="title" class="fade"></h1>
+      <h3 id="author" class="fade"></h3>
+      <p id="content" class="fade"></p>
+      <div id="extra" class="extra fade"></div>
+    </div>
   </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
