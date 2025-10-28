@@ -1,77 +1,208 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SuQin CyberSpace - AI Hub</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>小灰灰 — 个人主页</title>
+  <meta name="description" content="小灰灰的个人主页 — 电子工程 / 教师 / 项目集" />
+
+  <!-- 基本样式 -->
   <style>
-    * {margin: 0; padding: 0; box-sizing: border-box;}
-    body {
-      font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background-color: #f4f4f9;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+    :root{
+      --bg: #ffffff;
+      --card: #ffffff;
+      --text: #222;
+      --muted: #6b7280;
+      --accent: #6a5acd;
+      --glass: rgba(255,255,255,0.6);
+      --shadow: 0 6px 24px rgba(15,23,42,0.08);
+      --radius: 14px;
     }
-    .container {
-      width: 90%;
-      max-width: 900px;
-      height: 90vh;
-      background-color: white;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
+    [data-theme="dark"]{
+      --bg: #0b1020;
+      --card: #0f1724;
+      --text: #e6eef8;
+      --muted: #9aa4b2;
+      --accent: #8b7bff;
+      --glass: rgba(255,255,255,0.04);
+      --shadow: 0 8px 30px rgba(2,6,23,0.6);
     }
-    header {
-      background: linear-gradient(135deg, #6a5acd, #7b68ee);
-      color: white;
-      text-align: center;
-      padding: 12px;
-      font-size: 18px;
-      font-weight: bold;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, var(--bg), color-mix(in srgb, var(--bg) 92%, #f7f7ff));
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
     }
-    select {
-      margin-right: 12px;
-      padding: 6px 10px;
-      border-radius: 8px;
-      border: none;
-      outline: none;
-      font-size: 14px;
+
+    /* 布局容器 */
+    .wrap{
+      max-width:1100px;
+      margin:36px auto;
+      padding:24px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:20px;
     }
-    iframe {
-      flex: 1;
-      border: none;
-      width: 100%;
-      background-color: #f9f9fb;
+
+    header.topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.6), transparent);
+      padding:12px 18px;
+      border-radius:12px;
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(6px);
     }
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand .logo{
+      width:44px;height:44px;border-radius:10px;flex-shrink:0;
+      background:linear-gradient(135deg,var(--accent), #5b9af7);
+      display:flex;align-items:center;justify-content:center;color:white;font-weight:700;
+      box-shadow: 0 6px 18px rgba(106,90,205,0.18);
+    }
+    .brand h1{font-size:16px;margin:0}
+    .brand p{font-size:12px;margin:0;color:var(--muted)}
+
+    .actions{display:flex;gap:8px;align-items:center}
+    .btn{
+      padding:8px 12px;border-radius:10px;border:none;cursor:pointer;font-weight:600;
+      background:var(--accent);color:white;
+      box-shadow: 0 6px 18px rgba(106,90,205,0.12);
+    }
+    .ghost{background:transparent;color:var(--text);border:1px solid rgba(0,0,0,0.06)}
+    .icon-btn{width:40px;height:40px;border-radius:10px;display:inline-grid;place-items:center;background:var(--glass);border:none}
+
+    /* hero */
+    .hero{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:18px;
+      padding:18px;
+      background:linear-gradient(180deg, color-mix(in srgb, var(--card) 92%, white), var(--card));
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero-inner{display:flex;gap:18px;align-items:center}
+    .avatar{
+      width:110px;height:110px;border-radius:16px;flex-shrink:0;
+      background:linear-gradient(135deg,var(--accent), #5b9af7);
+      display:flex;align-items:center;justify-content:center;color:white;font-size:36px;font-weight:700;
+      box-shadow: 0 10px 30px rgba(106,90,205,0.12);
+    }
+    .intro h2{margin:0;font-size:22px}
+    .intro p{margin:8px 0;color:var(--muted)}
+    .tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .tag{background:transparent;border:1px solid rgba(0,0,0,0.06);padding:6px 10px;border-radius:999px;font-size:13px;color:var(--muted)}
+
+    /* 主体网格：About + Projects */
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:18px;
+    }
+    @media(min-width:900px){
+      .grid{grid-template-columns: 360px 1fr}
+      .hero{grid-column:1/-1}
+    }
+
+    /* 侧边卡片 */
+    .card{
+      background:var(--card);
+      border-radius:12px;padding:16px;box-shadow:var(--shadow);
+    }
+    .section-title{font-weight:700;margin-bottom:12px}
+
+    .about p{color:var(--muted);font-size:14px}
+    .skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .skill{padding:8px 10px;border-radius:10px;background:linear-gradient(90deg, rgba(106,90,205,0.08), rgba(91,154,247,0.04));font-size:13px}
+
+    /* Projects */
+    .projects-grid{display:grid;gap:12px}
+    @media(min-width:700px){ .projects-grid{grid-template-columns:repeat(2,1fr)} }
+    .proj{
+      padding:12px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
+      border:1px solid rgba(0,0,0,0.04);
+    }
+    .proj h3{margin:0 0 8px 0}
+    .proj p{margin:0;color:var(--muted);font-size:14px}
+    .proj-footer{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+
+    /* contact */
+    .contact-row{display:flex;gap:8px;flex-wrap:wrap}
+    .contact-row a{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;text-decoration:none;color:var(--text);border:1px solid rgba(0,0,0,0.04)}
+    .small{font-size:13px;color:var(--muted)}
+
+    footer{opacity:0.9;padding:12px 6px;text-align:center;color:var(--muted)}
+
+    /* 小动画 */
+    .fade-up{opacity:0;transform:translateY(8px);transition: all 420ms cubic-bezier(.2,.9,.25,1)}
+    .in-view{opacity:1;transform:none}
+
+    /* 表单样式 */
+    form input, form textarea{
+      width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);margin-top:8px;background:transparent;color:var(--text)
+    }
+    form button{margin-top:10px}
   </style>
 </head>
-<body>
-  <div class="container">
-    <header>
-      <span>💬 SuQin CyberSpace AI 集成面板</span>
-      <select id="aiSelector">
-        <option value="https://kimi.moonshot.cn/">Kimi（月之暗面）</option>
-        <option value="https://chat.deepseek.com/">DeepSeek</option>
-        <option value="https://chat.openai.com/">ChatGPT</option>
-      </select>
+<body data-theme="light">
+  <div class="wrap">
+
+    <!-- 顶栏 -->
+    <header class="topbar fade-up">
+      <div class="brand">
+        <div class="logo">小灰</div>
+        <div>
+          <h1>小灰灰</h1>
+          <p>电子工程系 · 教师 · 项目开发</p>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="icon-btn" id="themeToggle" title="切换暗黑/明亮">🌓</button>
+        <a class="btn" href="#contact">联系我</a>
+      </div>
     </header>
 
-    <iframe id="aiFrame" src="https://kimi.moonshot.cn/"></iframe>
-  </div>
+    <!-- hero -->
+    <section class="hero fade-up" id="hero">
+      <div class="hero-inner">
+        <div class="avatar">SH</div>
+        <div class="intro">
+          <h2>你好，我是 小灰灰（宋家正）</h2>
+          <p>电子与集成电路方向研究者 / 大学教师 — 我喜欢把复杂问题拆成简单模块并用代码解决它们。</p>
 
-  <script>
-    const selector = document.getElementById('aiSelector');
-    const iframe = document.getElementById('aiFrame');
-    selector.addEventListener('change', () => {
-      iframe.src = selector.value;
-    });
-  </script>
-</body>
-</html>
+          <div class="tag-row">
+            <div class="tag">STM32 教学</div>
+            <div class="tag">VLSI / HSPICE</div>
+            <div class="tag">C++ / XGBoost</div>
+            <div class="tag">Figure & Simulations</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
+        <a class="btn" href="#projects">我的项目</a>
+        <a class="ghost" href="resume.pdf" download>下载简历</a>
+        <a class="ghost" href="https://github.com/" target="_blank">GitHub</a>
+      </div>
+    </section>
+
+    <!-- 主体两栏 -->
+    <main class="grid">
+      <!-- 左栏：About / Skills -->
+      <aside class="card about fade-up">
+        <div class="section-title">关于我</div>
+        <p>我在东南大学攻读电子相关方向，现任课程教师，研究与工程实践并重。擅长数字/模拟混合电路设计、仿真与性能评估。</p>
+
+        <div style="margin-top:12px">
+          <div class="small">学历</div>
+        
