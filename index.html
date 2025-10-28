@@ -1,320 +1,167 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>待定 — 个人主页</title>
-  <meta name="description" content="个人主页（占位） — 待定" />
-  <meta name="author" content="待定" />
-  <style>
-    :root{
-      --bg: #f6f8fb;
-      --card: #ffffff;
-      --text: #0f1724;
-      --muted: #64748b;
-      --accent: #6a5acd;
-      --glass: rgba(255,255,255,0.6);
-      --radius: 14px;
-      --shadow: 0 8px 30px rgba(15,23,42,0.06);
-    }
-    [data-theme="dark"]{
-      --bg: #071025;
-      --card: #07172a;
-      --text: #e6eef8;
-      --muted: #9aa4b2;
-      --accent: #7b68ee;
-      --glass: rgba(255,255,255,0.03);
-      --shadow: 0 10px 40px rgba(2,6,23,0.6);
-    }
-
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: linear-gradient(180deg, var(--bg), color-mix(in srgb, var(--bg) 92%, #ffffff));
-      color:var(--text);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.5;
-      padding:28px;
-    }
-
-    /* 容器 */
-    .container{
-      max-width:1100px;
-      margin:0 auto;
-      display:grid;
-      gap:20px;
-      grid-template-columns: 1fr;
-    }
-
-    /* 顶栏 */
-    header.topbar{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      padding:12px 16px;
-      background: linear-gradient(90deg, rgba(255,255,255,0.6), transparent);
-      border-radius:12px;
-      box-shadow:var(--shadow);
-      backdrop-filter: blur(6px);
-    }
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{
-      width:48px;height:48px;border-radius:12px;
-      display:flex;align-items:center;justify-content:center;color:white;font-weight:700;
-      background:linear-gradient(135deg,var(--accent), #5b9af7);
-      font-size:18px;
-      flex-shrink:0;
-    }
-    .brand h1{font-size:16px;margin:0}
-    .brand p{margin:0;font-size:12px;color:var(--muted)}
-
-    .actions{display:flex;gap:8px;align-items:center}
-    .btn{padding:8px 12px;border-radius:10px;border:none;cursor:pointer;font-weight:600;background:var(--accent);color:white}
-    .ghost{background:transparent;color:var(--text);border:1px solid rgba(0,0,0,0.06);padding:8px 12px;border-radius:10px}
-
-    /* 主体布局 */
-    .hero{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:18px;
-      padding:18px;
-      background:var(--card);
-      border-radius:14px;
-      box-shadow:var(--shadow);
-    }
-    .hero-inner{display:flex;gap:18px;align-items:center}
-    .avatar{
-      width:110px;height:110px;border-radius:14px;background:linear-gradient(135deg,var(--accent), #5b9af7);
-      display:flex;align-items:center;justify-content:center;color:white;font-size:36px;font-weight:700;
-      box-shadow: 0 10px 30px rgba(106,90,205,0.12);
-      flex-shrink:0;
-    }
-    .intro h2{margin:0;font-size:22px}
-    .intro p{margin:8px 0;color:var(--muted)}
-    .tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-    .tag{background:transparent;border:1px solid rgba(0,0,0,0.06);padding:6px 10px;border-radius:999px;font-size:13px;color:var(--muted)}
-
-    /* 栅格 */
-    .grid{
-      display:grid;
-      gap:18px;
-      grid-template-columns: 1fr;
-    }
-    @media(min-width:900px){
-      .grid{grid-template-columns: 320px 1fr}
-      .hero{grid-column:1/-1}
-    }
-
-    .card{
-      background:var(--card);
-      border-radius:12px;padding:16px;box-shadow:var(--shadow);
-    }
-
-    .section-title{font-weight:700;margin-bottom:12px}
-
-    .skills{display:flex;flex-wrap:wrap;gap:8px}
-    .skill{padding:8px 10px;border-radius:10px;background:linear-gradient(90deg, rgba(106,90,205,0.06), rgba(91,154,247,0.03));font-size:13px}
-
-    .projects-grid{display:grid;gap:12px}
-    @media(min-width:700px){ .projects-grid{grid-template-columns:repeat(2,1fr)} }
-    .proj{padding:12px;border-radius:12px;border:1px solid rgba(0,0,0,0.04)}
-    .proj h3{margin:0 0 8px 0}
-    .proj p{margin:0;color:var(--muted);font-size:14px}
-    .proj-footer{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
-
-    /* 联系表单 */
-    form input, form textarea{
-      width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);margin-top:8px;background:transparent;color:var(--text)
-    }
-    form button{margin-top:10px}
-
-    footer{opacity:0.9;padding:12px 6px;text-align:center;color:var(--muted)}
-
-    /* 小动画 */
-    .fade-up{opacity:0;transform:translateY(8px);transition: all 420ms cubic-bezier(.2,.9,.25,1)}
-    .in-view{opacity:1;transform:none}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>小灰灰互动主页（占位）</title>
+<style>
+  :root{
+    --bg:#f6f8fb;--card:#fff;--text:#0f1724;--muted:#64748b;
+    --accent:#6a5acd;--radius:12px;--shadow:0 8px 30px rgba(15,23,42,0.06);
+  }
+  [data-theme="dark"]{
+    --bg:#071025;--card:#07172a;--text:#e6eef8;--muted:#9aa4b2;
+    --accent:#7b68ee;--shadow:0 10px 40px rgba(2,6,23,0.6);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;height:100%;font-family:Inter,"Segoe UI",Roboto,sans-serif;line-height:1.5;background:var(--bg);color:var(--text);}
+  body{padding:20px;}
+  .container{max-width:1100px;margin:0 auto;display:grid;gap:20px;grid-template-columns:1fr;}
+  header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);}
+  header .brand{display:flex;align-items:center;gap:12px;}
+  .logo{width:50px;height:50px;background:var(--accent);border-radius:var(--radius);display:flex;justify-content:center;align-items:center;color:#fff;font-weight:700;font-size:24px;}
+  header h1{margin:0;font-size:18px;}
+  header p{margin:0;color:var(--muted);font-size:12px;}
+  .actions button{margin-left:8px;padding:6px 12px;border:none;border-radius:8px;cursor:pointer;font-weight:600;}
+  .btn{background:var(--accent);color:white;}
+  .ghost{background:transparent;color:var(--text);border:1px solid rgba(0,0,0,0.1);}
+  .hero{display:flex;flex-wrap:wrap;gap:20px;padding:16px;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);}
+  .avatar{width:120px;height:120px;background:var(--accent);border-radius:var(--radius);display:flex;justify-content:center;align-items:center;color:#fff;font-size:36px;font-weight:700;}
+  .intro{flex:1;min-width:200px;}
+  .tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+  .tag{padding:6px 10px;border-radius:999px;background:rgba(106,90,205,0.1);font-size:13px;}
+  .grid{display:grid;gap:20px;grid-template-columns:1fr;}
+  @media(min-width:900px){.grid{grid-template-columns:320px 1fr;}}
+  .card{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);}
+  .section-title{font-weight:700;margin-bottom:12px;}
+  .skills{display:flex;flex-wrap:wrap;gap:8px;}
+  .skill{padding:6px 10px;border-radius:8px;background:rgba(106,90,205,0.1);font-size:13px;}
+  .projects-grid{display:grid;gap:12px;}
+  @media(min-width:700px){.projects-grid{grid-template-columns:repeat(2,1fr);}}
+  .proj{padding:12px;border-radius:12px;border:1px solid rgba(0,0,0,0.08);}
+  .proj h3{margin:0 0 6px 0;font-size:16px;}
+  .proj p{margin:0;color:var(--muted);font-size:14px;}
+  footer{text-align:center;color:var(--muted);margin-top:20px;font-size:13px;}
+  canvas{border:1px solid rgba(0,0,0,0.1);border-radius:var(--radius);}
+</style>
 </head>
 <body data-theme="light">
-  <div class="container">
-    <!-- header -->
-    <header class="topbar fade-up">
-      <div class="brand">
-        <div class="logo">待</div>
-        <div>
-          <h1 id="displayName">待定 — 显示姓名</h1>
-          <p id="subtitle">一句话简介（待定）</p>
-        </div>
-      </div>
+<div class="container">
 
-      <div class="actions">
-        <button class="ghost" id="resumeBtn">下载简历（占位）</button>
-        <button class="btn" id="themeToggle" title="切换暗色/明亮">切换主题</button>
-      </div>
-    </header>
-
-    <!-- hero -->
-    <section class="hero fade-up" id="hero">
-      <div class="hero-inner">
-        <div class="avatar" id="avatarBox" aria-hidden="true">
-          <!-- 简易 SVG 占位头像 -->
-          <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="border-radius:8px">
-            <rect width="100" height="100" rx="12" fill="white" fill-opacity="0.06"/>
-            <text x="50" y="58" text-anchor="middle" font-size="36" fill="white" font-family="sans-serif">待</text>
-          </svg>
-        </div>
-
-        <div class="intro">
-          <h2 id="heroName">姓名 · 待定</h2>
-          <p id="heroDesc">一句话介绍写在这里（示例：电子工程 / 教师 / 研究者 / 开源爱好者）。</p>
-
-          <div class="tag-row" id="tagRow">
-            <div class="tag">占位：技能 1</div>
-            <div class="tag">占位：技能 2</div>
-            <div class="tag">占位：技能 3</div>
-          </div>
-        </div>
-      </div>
-
-      <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
-        <a class="btn" href="#projects">查看项目</a>
-        <a class="ghost" href="#" id="contactJump">联系我们</a>
-        <a class="ghost" href="#" id="openGit" target="_blank">GitHub（占位）</a>
-      </div>
-    </section>
-
-    <!-- 主体 -->
-    <main class="grid">
-      <!-- 左侧 -->
-      <aside class="card fade-up">
-        <div class="section-title">关于我</div>
-        <p id="aboutText">这里是“关于我”的占位文字。你可以把教育、工作、研究方向、擅长技术写在这里。</p>
-
-        <div style="margin-top:12px">
-          <div class="section-title">技能</div>
-          <div class="skills" id="skillsBox">
-            <div class="skill">占位 · 技能 A</div>
-            <div class="skill">占位 · 技能 B</div>
-            <div class="skill">占位 · 技能 C</div>
-          </div>
-        </div>
-
-        <div style="margin-top:14px">
-          <div class="section-title">联系</div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <a class="ghost" href="mailto:your@email.com" id="emailLink">✉️ 邮箱（占位）</a>
-            <a class="ghost" href="#" id="weblink">🔗 个人链接</a>
-          </div>
-          <p style="margin-top:8px;color:var(--muted);font-size:13px">合作邀约 / 讲座邀请请通过邮箱联系。</p>
-        </div>
-      </aside>
-
-      <!-- 右侧 -->
-      <section>
-        <div class="card fade-up" id="projects">
-          <div class="section-title">项目集（占位）</div>
-          <div class="projects-grid" id="projectsGrid">
-            <article class="proj">
-              <h3>项目 A（占位）</h3>
-              <p>项目简介放这里。替换为实际项目说明与链接。</p>
-              <div class="proj-footer">
-                <small style="color:var(--muted)">标签：占位</small>
-                <a href="#" class="small">查看 →</a>
-              </div>
-            </article>
-
-            <article class="proj">
-              <h3>项目 B（占位）</h3>
-              <p>项目简介放这里。替换为实际项目说明与链接。</p>
-              <div class="proj-footer">
-                <small style="color:var(--muted)">标签：占位</small>
-                <a href="#" class="small">查看 →</a>
-              </div>
-            </article>
-          </div>
-        </div>
-
-        <div class="card fade-up" style="margin-top:12px" id="contact">
-          <div class="section-title">联系我 / 发送信息</div>
-          <form id="contactForm">
-            <label>你的名字</label>
-            <input type="text" name="name" placeholder="例如：张三" required />
-
-            <label>邮箱</label>
-            <input type="email" name="email" placeholder="example@mail.com" required />
-
-            <label>内容</label>
-            <textarea name="message" rows="5" placeholder="写下你的合作 / 咨询内容..." required></textarea>
-
-            <button class="btn" type="submit">准备发送（mailto）</button>
-            <div id="formStatus" style="margin-top:8px;color:var(--muted);font-size:13px"></div>
-          </form>
-        </div>
-      </section>
-    </main>
-
-    <footer class="fade-up" style="margin-top:18px">© <span id="year"></span> 待定 — 个人主页</footer>
+<!-- header -->
+<header>
+  <div class="brand">
+    <div class="logo">待</div>
+    <div>
+      <h1>小灰灰（占位）</h1>
+      <p>一句话简介（占位）</p>
+    </div>
   </div>
+  <div class="actions">
+    <button class="ghost" id="themeToggle">切换主题</button>
+    <button class="btn">简历（占位）</button>
+  </div>
+</header>
 
-  <script>
-    // 自动填年份
-    document.getElementById('year').textContent = new Date().getFullYear();
+<!-- hero -->
+<section class="hero">
+  <div class="avatar">待</div>
+  <div class="intro">
+    <h2>姓名 · 待定</h2>
+    <p>介绍占位文字</p>
+    <div class="tag-row">
+      <div class="tag">技能1</div>
+      <div class="tag">技能2</div>
+      <div class="tag">技能3</div>
+    </div>
+  </div>
+</section>
 
-    // 主题开关（记忆到 localStorage）
-    const body = document.body;
-    const toggle = document.getElementById('themeToggle');
-    const saved = localStorage.getItem('site-theme') || 'light';
-    body.setAttribute('data-theme', saved);
-    toggle.addEventListener('click', () => {
-      const next = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      body.setAttribute('data-theme', next);
-      localStorage.setItem('site-theme', next);
-    });
+<!-- 主体内容 -->
+<main class="grid">
+  <!-- 左侧 about -->
+  <aside class="card">
+    <div class="section-title">关于我</div>
+    <p>这里写你的背景/专业/爱好占位文字</p>
+    <div style="margin-top:12px">
+      <div class="section-title">技能</div>
+      <div class="skills">
+        <div class="skill">占位技能A</div>
+        <div class="skill">占位技能B</div>
+        <div class="skill">占位技能C</div>
+      </div>
+    </div>
+    <div style="margin-top:12px">
+      <div class="section-title">联系</div>
+      <a href="mailto:example@mail.com" class="ghost">邮箱占位</a>
+    </div>
+  </aside>
 
-    // 视差/滚动动画（简单）
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
-    }, {threshold: 0.12});
-    document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+  <!-- 右侧互动实验 -->
+  <section>
+    <div class="card">
+      <div class="section-title">互动实验区</div>
+      <p>点击开关模拟 LED 灯闪烁</p>
+      <canvas id="ledCanvas" width="300" height="100"></canvas>
+      <div style="margin-top:8px;">
+        <button class="btn" onclick="toggleLED(0)">开关1</button>
+        <button class="btn" onclick="toggleLED(1)">开关2</button>
+        <button class="btn" onclick="toggleLED(2)">开关3</button>
+      </div>
+    </div>
 
-    // contact 表单：用 mailto 打开邮箱客户端（示例）
-    const form = document.getElementById('contactForm');
-    const status = document.getElementById('formStatus');
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const fm = new FormData(form);
-      const name = fm.get('name'), email = fm.get('email'), message = fm.get('message');
-      const subject = encodeURIComponent('来自个人主页的消息：' + name);
-      const bodyText = encodeURIComponent('姓名：' + name + '\n邮箱：' + email + '\n\n' + message);
-      const mailto = 'mailto:' + encodeURIComponent('your@email.com')
-                   + '?subject=' + subject + '&body=' + bodyText;
-      status.textContent = '已准备好发送，请在打开的邮件客户端中确认并发送。';
-      setTimeout(() => { window.location.href = mailto; }, 600);
-    });
+    <div class="card" style="margin-top:12px">
+      <div class="section-title">逻辑门演示</div>
+      <p>输入改变输出（AND/OR/NOT）</p>
+      <div id="logicDemo" style="display:flex;gap:12px;flex-wrap:wrap;">
+        <button class="btn" onclick="updateLogic(0)">输入1</button>
+        <button class="btn" onclick="updateLogic(1)">输入2</button>
+        <div id="logicOutput">输出：0</div>
+      </div>
+    </div>
+  </section>
+</main>
 
-    // 顶栏简历按钮（占位）
-    document.getElementById('resumeBtn').addEventListener('click', () => {
-      // 如果有 resume.pdf 请把链接改为 resume.pdf
-      window.open('#', '_blank');
-      alert('简历下载占位：请把按钮链接改为你的 resume.pdf');
-    });
+<footer>© <span id="year"></span> 小灰灰（占位）</footer>
+</div>
 
-    // 其它占位链接行为
-    document.getElementById('openGit').addEventListener('click', (e) => {
-      e.preventDefault();
-      alert('GitHub 链接占位：请把链接替换为你的个人仓库地址');
-    });
-    document.getElementById('contactJump').addEventListener('click', (e) => {
-      e.preventDefault();
-      document.getElementById('contact').scrollIntoView({behavior:'smooth'});
-    });
+<script>
+  // 年份自动更新
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-    // 页面加载成功提示（调试用，可删除）
-    console.info('个人主页占位版已加载 — 保存为 index.html 并部署到 Pages 即可显示内容。');
-  </script>
+  // 主题切换
+  const body = document.body;
+  const toggle = document.getElementById('themeToggle');
+  toggle.addEventListener('click',()=>{ 
+    const next=body.getAttribute('data-theme')==='dark'?'light':'dark';
+    body.setAttribute('data-theme',next);
+  });
+
+  // LED 模拟
+  const ledCanvas = document.getElementById('ledCanvas');
+  const ctx = ledCanvas.getContext('2d');
+  const leds = [false,false,false];
+  function drawLEDs(){
+    ctx.clearRect(0,0,ledCanvas.width,ledCanvas.height);
+    for(let i=0;i<3;i++){
+      ctx.beginPath();
+      ctx.arc(50+i*100,50,20,0,2*Math.PI);
+      ctx.fillStyle=leds[i]?'red':'rgba(0,0,0,0.1)';
+      ctx.fill();
+      ctx.strokeStyle='#000';
+      ctx.stroke();
+    }
+  }
+  function toggleLED(i){leds[i]=!leds[i];drawLEDs();}
+  drawLEDs();
+
+  // 逻辑门示例
+  let inputs = [0,0];
+  function updateLogic(i){
+    inputs[i] = inputs[i] ? 0 : 1;
+    const output = inputs[0] & inputs[1]; // AND
+    document.getElementById('logicOutput').textContent='输出(AND): '+output;
+  }
+</script>
 </body>
 </html>
