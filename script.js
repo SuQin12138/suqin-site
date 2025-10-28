@@ -86,8 +86,9 @@ function showRandomPoem() {
 }
 
 // 点击显示详情
-poemCard.addEventListener("click", () => {
-  extra.style.display = extra.style.display === "none" ? "block" : "block";
+poemCard.addEventListener("click", (e) => {
+  if (e.target.id === "extra") return;
+  extra.classList.toggle("show");
 });
 
 // 分类菜单切换
