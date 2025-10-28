@@ -1,170 +1,77 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SuQin CyberSpace - AI对话</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: #f4f4f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        }
-
-        .chat-container {
-            width: 400px;
-            height: 600px;
-            background-color: #fff;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .chat-header {
-            background: linear-gradient(135deg, #6a5acd, #7b68ee);
-            color: white;
-            text-align: center;
-            padding: 15px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .chat-box {
-            flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-            background-color: #f9f9fb;
-        }
-
-        .message {
-            margin-bottom: 15px;
-            display: flex;
-            align-items: flex-end;
-        }
-
-        .message.ai {
-            justify-content: flex-start;
-        }
-
-        .message.user {
-            justify-content: flex-end;
-        }
-
-        .bubble {
-            max-width: 70%;
-            padding: 10px 14px;
-            border-radius: 18px;
-            line-height: 1.4;
-            word-wrap: break-word;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .message.ai .bubble {
-            background-color: #e0e7ff;
-            color: #333;
-            border-bottom-left-radius: 0;
-        }
-
-        .message.user .bubble {
-            background-color: #6a5acd;
-            color: #fff;
-            border-bottom-right-radius: 0;
-        }
-
-        .chat-input {
-            display: flex;
-            padding: 10px;
-            background-color: #f1f1f5;
-            border-top: 1px solid #ddd;
-        }
-
-        .chat-input input {
-            flex: 1;
-            border: none;
-            outline: none;
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 15px;
-        }
-
-        .chat-input button {
-            margin-left: 8px;
-            background-color: #6a5acd;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 10px 16px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .chat-input button:hover {
-            background-color: #5941d0;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SuQin CyberSpace - AI Hub</title>
+  <style>
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+    body {
+      font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      width: 90%;
+      max-width: 900px;
+      height: 90vh;
+      background-color: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    header {
+      background: linear-gradient(135deg, #6a5acd, #7b68ee);
+      color: white;
+      text-align: center;
+      padding: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    select {
+      margin-right: 12px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+    }
+    iframe {
+      flex: 1;
+      border: none;
+      width: 100%;
+      background-color: #f9f9fb;
+    }
+  </style>
 </head>
 <body>
-    <div class="chat-container">
-        <div class="chat-header">💬 SuQin AI 助手</div>
-        <div class="chat-box" id="chatBox">
-            <div class="message ai">
-                <div class="bubble">你好呀，我是你的AI助手，有什么想聊的吗？</div>
-            </div>
-        </div>
-        <div class="chat-input">
-            <input type="text" id="userInput" placeholder="输入消息..." />
-            <button id="sendBtn">发送</button>
-        </div>
-    </div>
+  <div class="container">
+    <header>
+      <span>💬 SuQin CyberSpace AI 集成面板</span>
+      <select id="aiSelector">
+        <option value="https://kimi.moonshot.cn/">Kimi（月之暗面）</option>
+        <option value="https://chat.deepseek.com/">DeepSeek</option>
+        <option value="https://chat.openai.com/">ChatGPT</option>
+      </select>
+    </header>
 
-    <script>
-        const chatBox = document.getElementById('chatBox');
-        const userInput = document.getElementById('userInput');
-        const sendBtn = document.getElementById('sendBtn');
+    <iframe id="aiFrame" src="https://kimi.moonshot.cn/"></iframe>
+  </div>
 
-        function appendMessage(sender, text) {
-            const msg = document.createElement('div');
-            msg.className = `message ${sender}`;
-            msg.innerHTML = `<div class="bubble">${text}</div>`;
-            chatBox.appendChild(msg);
-            chatBox.scrollTop = chatBox.scrollHeight; // 自动滚动到底部
-        }
-
-        function handleSend() {
-            const text = userInput.value.trim();
-            if (text === '') return;
-
-            appendMessage('user', text);
-            userInput.value = '';
-
-            // 模拟 AI 回复（之后可以换成真实 API 调用）
-            setTimeout(() => {
-                const replies = [
-                    "有意思～你能多说一点吗？",
-                    "嗯，我懂了！",
-                    "那我们试着深入分析一下～",
-                    "这个问题不错，我想想看..."
-                ];
-                const reply = replies[Math.floor(Math.random() * replies.length)];
-                appendMessage('ai', reply);
-            }, 600);
-        }
-
-        sendBtn.addEventListener('click', handleSend);
-        userInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') handleSend();
-        });
-    </script>
+  <script>
+    const selector = document.getElementById('aiSelector');
+    const iframe = document.getElementById('aiFrame');
+    selector.addEventListener('change', () => {
+      iframe.src = selector.value;
+    });
+  </script>
 </body>
 </html>
