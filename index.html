@@ -3,10 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>苏琴诗词空间 · SuQin Poetry Space</title>
+  <title>苏衾·诗词空间 · SuQin Poetry Space</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <header>
+    <input type="text" id="search-input" placeholder="搜索诗词/作者..." />
+    <button id="category-btn">分类菜单</button>
+    <ul id="category-list" class="hidden"></ul>
+  </header>
+
   <div class="container">
     <div class="poem-card" id="poem-card">
       <h1 id="title" class="fade"></h1>
